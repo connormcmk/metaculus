@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
+import { fetchPosts } from "@/app/(main)/questions/actions";
+import { PostStatus } from "@/types/post";
+
 import BottomNavigation from "./bottom_navigation";
 import ConferenceQuestion from "./conference_question";
 import ForecastOverview from "./forecast_overview";
-import { fetchPosts } from "@/app/(main)/questions/actions";
-import { PostStatus } from "@/types/post";
 
 export enum ConferenceMode {
   Question = "question",
@@ -31,7 +32,7 @@ const QuestionManager: React.FC<QuestionManagerProps> = ({ slug }) => {
           0,
           100
         );
-        setQuestionIds(questions.map(q => q.id));
+        setQuestionIds(questions.map((q) => q.id));
       } catch (error) {
         console.error("Failed to fetch question IDs:", error);
         setQuestionIds([]);

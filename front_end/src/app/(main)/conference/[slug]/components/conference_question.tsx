@@ -5,10 +5,8 @@ import BinarySlider from "@/app/(main)/questions/[id]/components/forecast_maker/
 import { BINARY_FORECAST_PRECISION } from "@/app/(main)/questions/[id]/components/forecast_maker/binary_slider";
 import { getPost } from "@/app/(main)/questions/actions";
 import { createForecasts } from "@/app/(main)/questions/actions";
+import MarkdownEditor from "@/components/markdown_editor";
 import { PostWithForecasts } from "@/types/post";
-
-import { conferenceStyles } from "./conference_styles";
-import KeyFactors from "./key_factors";
 
 interface ConferenceQuestionProps {
   questionId: number;
@@ -133,13 +131,18 @@ const ConferenceQuestion = ({ questionId }: ConferenceQuestionProps) => {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting || !currentPrediction}
-              className={conferenceStyles.button}
+              className="rounded bg-blue-400 px-6 py-4 font-semibold text-blue-800 hover:bg-blue-500 dark:bg-blue-700 dark:text-blue-200 dark:hover:bg-blue-600"
             >
               {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </div>
-        <KeyFactors questionId={question} />
+        <div className="mb-6 text-left">
+          <MarkdownEditor
+            markdown={question.question?.description || ""}
+            mode="read"
+          />
+        </div>
       </div>
     </div>
   );
